@@ -42,7 +42,7 @@ npx serve dist
 | --- | --- |
 | **Vercel** | 导入仓库，Framework 选 Vite，Build Command `npm run build`，Output Directory `dist` |
 | **Netlify** | Build Command `npm run build`，Publish directory `dist` |
-| **GitHub Pages** | 已内置 [deploy.yml](.github/workflows/deploy.yml)，push 到 `main` 后自动构建并发布。首次使用需在仓库 Settings → Pages 把 Source 设为 **GitHub Actions**；工作流也会尝试自动启用 Pages |
+| **GitHub Pages** | 已内置 [deploy.yml](.github/workflows/deploy.yml)。首次需在仓库 Settings → Pages → Build and deployment → Source 选择 **GitHub Actions**（`GITHUB_TOKEN` 无权替用户开启 Pages）；启用后每次 push 到 `main` 自动构建发布。未启用时工作流仍会成功构建，只跳过部署并给出 warning |
 | **Cloudflare Pages** | Build Command `npm run build`，Build output directory `dist` |
 
 ## 目录结构
