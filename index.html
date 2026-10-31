@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agent Loop Engineering · 智能体循环工程实战指南</title>
+    <meta
+      name="description"
+      content="写给开发者的 Agent Loop Engineering 实战指南：14 章讲透 Context → Action → Verify → Loop，让 AI Agent 会干活、会刹车、不烧钱。包含停止条件、上下文压缩、工具设计、HITL、可观测性、成本控制与落地 Checklist。"
+    />
+    <meta name="theme-color" content="#f8fafc" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Agent Loop Engineering · 智能体循环工程实战指南" />
+    <meta
+      property="og:description"
+      content="不是写一个 prompt 就叫 Agent——真正的工程，在那个「思考→行动→观察→再来一次」的循环里。"
+    />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <style>
+      html { background: #f8fafc; }
+      html.dark { background: #0b1120; }
+    </style>
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('ale:theme');
+          var dark = stored
+            ? stored === 'dark'
+            : window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (dark) document.documentElement.classList.add('dark');
+          var meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute('content', dark ? '#0b1120' : '#f8fafc');
+        } catch (e) {}
+        try {
+          var lang = localStorage.getItem('ale:lang');
+          if (lang === 'en') document.documentElement.lang = 'en';
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
