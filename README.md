@@ -10,6 +10,7 @@
 
 - Vite 6 + React 18 + TypeScript 5
 - Tailwind CSS 3（`darkMode: 'class'`，颜色通过 CSS 变量驱动）
+- 暖纸色 + 青绿品牌体系，自托管 Manrope Variable / JetBrains Mono Variable（构建时内联）
 - 自绘 SVG / CSS 图表（折线、堆叠面积、瀑布图、环形循环图）
 - IntersectionObserver（滚动入场、目录高亮、数字滚动）
 - localStorage 持久化主题、语言与 Checklist
@@ -28,7 +29,7 @@ npm run build      # 类型检查 + 构建 + 把 JS/CSS 内联进 dist/index.htm
 npm run preview    # 本地预览 dist/
 ```
 
-构建脚本 `scripts/inline-build.mjs` 会把 JS/CSS 内联进 `dist/index.html`，因此产物是**单个自包含 HTML**（另有 favicon），既可以直接双击 `dist/index.html` 用 `file://` 打开，也可以放到任意静态服务器：
+字体通过 Vite 的 `assetsInlineLimit` 转成 data URI，构建脚本 `scripts/inline-build.mjs` 再把 JS/CSS 内联进 `dist/index.html`，因此产物是**单个自包含 HTML**（另有 favicon），既可以直接双击 `dist/index.html` 用 `file://` 打开，也可以放到任意静态服务器：
 
 ```bash
 npx serve dist
@@ -42,7 +43,7 @@ npx serve dist
 | --- | --- |
 | **Vercel** | 导入仓库，Framework 选 Vite，Build Command `npm run build`，Output Directory `dist` |
 | **Netlify** | Build Command `npm run build`，Publish directory `dist` |
-| **GitHub Pages** | 已内置 [deploy.yml](.github/workflows/deploy.yml)。首次需在仓库 Settings → Pages → Build and deployment → Source 选择 **GitHub Actions**（`GITHUB_TOKEN` 无权替用户开启 Pages）；启用后每次 push 到 `main` 自动构建发布。未启用时工作流仍会成功构建，只跳过部署并给出 warning |
+| **GitHub Pages** | 已启用并由 [deploy.yml](.github/workflows/deploy.yml) 自动发布 `dist`：每次 push 到 `main` 构建并部署。Pages 的 Source 必须保持 **GitHub Actions**；不要再添加 `jekyll-gh-pages` 之类部署仓库根目录的工作流，否则会覆盖构建产物，导致页面加载 `/src/main.tsx` 404 |
 | **Cloudflare Pages** | Build Command `npm run build`，Build output directory `dist` |
 
 ## 目录结构
@@ -60,7 +61,8 @@ agent-loop-engineering/
 ├─ src/
 │  ├─ main.tsx                # React 入口
 │  ├─ App.tsx                 # 页面骨架：Navbar + Sidebar + 14 章 + Footer
-│  ├─ index.css               # 设计系统：变量、卡片、代码块、图表、动效、响应式
+│  ├─ index.css               # 设计系统：品牌变量、字体、卡片、代码块、图表、动效、响应式
+│  ├─ assets/fonts/           # Manrope / JetBrains Mono Variable（构建时内联）
 │  ├─ i18n/
 │  │  └─ LangContext.tsx      # 中 / EN 上下文，默认中文，localStorage 记忆
 │  ├─ lib/
@@ -133,6 +135,7 @@ agent-loop-engineering/
 
 ## 交互与验收点
 
+- 暖纸色 + 青绿品牌体系，深色为深绿底；1180 版心、306 侧栏、68 导航、780 正文。
 - 桌面端固定左侧目录，滚动高亮当前章节；移动端汉堡菜单抽屉。
 - 右上角明暗主题 / 中英切换，无刷新、淡入淡出、`localStorage` 记忆。
 - 第 2 章环形图节点可点击，也可自动轮播。

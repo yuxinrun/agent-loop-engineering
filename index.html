@@ -8,7 +8,7 @@
       name="description"
       content="写给开发者的 Agent Loop Engineering 实战指南：14 章讲透 Context → Action → Verify → Loop，让 AI Agent 会干活、会刹车、不烧钱。包含停止条件、上下文压缩、工具设计、HITL、可观测性、成本控制与落地 Checklist。"
     />
-    <meta name="theme-color" content="#f8fafc" />
+    <meta name="theme-color" content="#f6f4ee" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Agent Loop Engineering · 智能体循环工程实战指南" />
     <meta
@@ -17,8 +17,8 @@
     />
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <style>
-      html { background: #f8fafc; }
-      html.dark { background: #0b1120; }
+      html { background: #f6f4ee; }
+      html.dark { background: #06100e; }
     </style>
     <script>
       (function () {
@@ -29,7 +29,7 @@
             : window.matchMedia('(prefers-color-scheme: dark)').matches;
           if (dark) document.documentElement.classList.add('dark');
           var meta = document.querySelector('meta[name="theme-color"]');
-          if (meta) meta.setAttribute('content', dark ? '#0b1120' : '#f8fafc');
+          if (meta) meta.setAttribute('content', dark ? '#06100e' : '#f6f4ee');
         } catch (e) {}
         try {
           var lang = localStorage.getItem('ale:lang');

@@ -34,10 +34,11 @@ export function LogoMark({ size = 36, className = '' }: LogoProps) {
       <rect x="16.5" y="16.5" width="15" height="15" rx="4.2" stroke="currentColor" strokeWidth="2.1" />
       <path
         d="M20.5 25.4h2.4l1.2-3.4 2.2 6.2 1.3-2.8h2.4"
-        stroke="var(--accent)"
+        stroke="currentColor"
         strokeWidth="1.9"
         strokeLinecap="round"
         strokeLinejoin="round"
+        opacity="0.86"
       />
     </svg>
   );
@@ -50,15 +51,15 @@ export function LogoLockup({ compact = false }: { compact?: boolean }) {
       className="group flex items-center gap-2.5 rounded-xl py-1 text-[var(--text)] no-underline"
       aria-label="Agent Loop Engineering — back to top"
     >
-      <span className="flex h-9 w-9 items-center justify-center rounded-[11px] border border-[var(--line)] bg-[var(--surface)] text-[var(--primary)] shadow-[var(--shadow-sm)] transition-colors group-hover:border-[var(--primary)]">
+      <span className="logo-tile flex h-9 w-9 items-center justify-center rounded-[10px] bg-[var(--primary)] text-[var(--primary-contrast)] transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-105">
         <LogoMark size={26} />
       </span>
       {!compact && (
-        <span className="leading-none">
-          <span className="block text-[0.82rem] font-bold tracking-tight text-[var(--text)]">
+        <span className="hidden leading-none sm:block">
+          <span className="block whitespace-nowrap text-[0.98rem] font-extrabold tracking-[-0.02em] text-[var(--text)]">
             Agent Loop Engineering
           </span>
-          <span className="mt-1 block font-mono text-[0.58rem] tracking-[0.12em] text-[var(--muted)]">
+          <span className="mt-1 block font-mono text-[0.55rem] tracking-[0.14em] text-[var(--muted)]">
             FIELD GUIDE · 14 CHAPTERS
           </span>
         </span>

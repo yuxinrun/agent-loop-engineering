@@ -14,13 +14,13 @@ function Stat({ target, prefix = '', suffix = '', label, sub, accent }: StatProp
   const { ref, value } = useCountUp(target);
   return (
     <div className="group relative px-4 py-5 text-center sm:px-5 sm:py-6">
-      <div className="stat-number text-2xl sm:text-[1.7rem]" style={accent ? { color: accent } : undefined}>
+      <div className="stat-number text-[1.65rem] sm:text-[1.95rem]" style={accent ? { color: accent } : undefined}>
         <span>{prefix}</span>
         <span ref={ref}>{value}</span>
         <span>{suffix}</span>
       </div>
-      <div className="mt-1.5 text-[0.74rem] font-semibold text-[var(--text)]">{label}</div>
-      <div className="mt-0.5 text-[0.63rem] leading-snug text-[var(--muted)]">{sub}</div>
+      <div className="mt-2 text-[0.74rem] font-semibold text-[var(--text)]">{label}</div>
+      <div className="mt-0.5 font-mono text-[0.6rem] leading-snug text-[var(--muted)]">{sub}</div>
     </div>
   );
 }

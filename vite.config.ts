@@ -7,5 +7,7 @@ export default defineConfig({
   build: {
     target: 'es2020',
     cssCodeSplit: true,
+    // Fonts are small enough to inline, keeping dist/index.html fully self-contained.
+    assetsInlineLimit: 120 * 1024,
   },
 });

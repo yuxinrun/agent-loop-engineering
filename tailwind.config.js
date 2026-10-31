@@ -6,21 +6,18 @@ export default {
     extend: {
       fontFamily: {
         sans: [
-          'Inter',
+          '"Manrope Variable"',
           '-apple-system',
           'BlinkMacSystemFont',
           '"Segoe UI"',
-          'Roboto',
-          '"Helvetica Neue"',
-          'Arial',
-          '"Noto Sans SC"',
           '"PingFang SC"',
           '"Hiragino Sans GB"',
           '"Microsoft YaHei"',
+          '"Noto Sans SC"',
           'sans-serif',
         ],
         mono: [
-          '"JetBrains Mono"',
+          '"JetBrains Mono Variable"',
           'ui-monospace',
           'SFMono-Regular',
           'Menlo',
@@ -30,8 +27,8 @@ export default {
         ],
       },
       maxWidth: {
-        prose: '760px',
-        shell: '900px',
+        prose: '780px',
+        shell: '1180px',
       },
     },
   },

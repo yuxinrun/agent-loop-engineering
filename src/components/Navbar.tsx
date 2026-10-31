@@ -50,7 +50,7 @@ function LangToggle() {
   const { lang, setLang, t } = useLang();
   return (
     <div
-      className="flex items-center gap-1 rounded-xl border border-[var(--line)] bg-[var(--surface)] p-0.5"
+      className="flex items-center gap-0.5 rounded-full border border-[var(--line)] p-0.5"
       aria-label={t('切换语言', 'Switch language')}
     >
       <svg
@@ -69,7 +69,7 @@ function LangToggle() {
         type="button"
         onClick={() => setLang('zh')}
         aria-pressed={lang === 'zh'}
-        className={`rounded-lg px-2 py-1 text-[0.68rem] font-bold transition-colors ${
+        className={`rounded-full px-2.5 py-1 text-[0.68rem] font-bold transition-colors ${
           lang === 'zh'
             ? 'bg-[var(--primary-soft)] text-[var(--primary-strong)]'
             : 'text-[var(--muted)] hover:text-[var(--text)]'
@@ -81,7 +81,7 @@ function LangToggle() {
         type="button"
         onClick={() => setLang('en')}
         aria-pressed={lang === 'en'}
-        className={`rounded-lg px-2 py-1 text-[0.68rem] font-bold transition-colors ${
+        className={`rounded-full px-2.5 py-1 text-[0.68rem] font-bold transition-colors ${
           lang === 'en'
             ? 'bg-[var(--primary-soft)] text-[var(--primary-strong)]'
             : 'text-[var(--muted)] hover:text-[var(--text)]'
@@ -112,12 +112,12 @@ export function Navbar({ activeId }: { activeId: string }) {
   return (
     <>
       <header className="nav-surface fixed inset-x-0 top-0 z-50 border-b border-[var(--line)]">
-        <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between gap-3 px-4 sm:px-6">
+        <div className="mx-auto flex h-[68px] max-w-[1600px] items-center justify-between gap-3 px-5 sm:px-7">
           <LogoLockup />
           <div className="flex items-center gap-2">
             <a
               href="#ch13"
-              className="hidden items-center gap-1.5 rounded-xl border border-[var(--line)] bg-[var(--surface)] px-3 py-2 text-[0.7rem] font-semibold text-[var(--muted)] no-underline transition-colors hover:border-[var(--primary)] hover:text-[var(--primary-strong)] md:flex"
+              className="hidden items-center gap-1.5 rounded-full border border-[var(--line)] px-3.5 py-2 text-[0.72rem] font-semibold text-[var(--text-soft)] no-underline transition-colors hover:border-[var(--primary)] hover:bg-[var(--primary-soft)] hover:text-[var(--primary-strong)] md:flex"
             >
               <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                 <path d="M3 8.4 6.2 11.6 13 4.8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -150,10 +150,10 @@ export function Navbar({ activeId }: { activeId: string }) {
             onClick={() => setOpen(false)}
             aria-label={t('关闭目录', 'Close menu')}
           />
-          <div id="mobile-menu" className="drawer-slide sidebar-surface absolute inset-y-0 left-0 flex w-[86%] max-w-[350px] flex-col border-r border-[var(--line)]">
+          <div id="mobile-menu" className="drawer-slide absolute inset-y-0 left-0 flex w-[86%] max-w-[350px] flex-col border-r border-[var(--line)] bg-[var(--bg)]">
             <div className="flex items-center justify-between border-b border-[var(--line)] px-4 py-3">
               <div className="flex items-center gap-2">
-                <span className="flex h-8 w-8 items-center justify-center rounded-[10px] border border-[var(--line)] bg-[var(--surface)] text-[var(--primary)]">
+                <span className="flex h-8 w-8 items-center justify-center rounded-[9px] bg-[var(--primary)] text-[var(--primary-contrast)]">
                   <LogoMark size={23} />
                 </span>
                 <span className="text-xs font-bold">Agent Loop Engineering</span>

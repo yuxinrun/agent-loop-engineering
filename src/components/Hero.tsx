@@ -77,7 +77,7 @@ function HeroLoop() {
           </g>
           {!reduced && (
             <g>
-              <circle r="13" fill="var(--accent)" opacity="0.13">
+              <circle r="13" fill="var(--accent)" opacity="0.12">
                 <animateMotion
                   dur="4s"
                   repeatCount="indefinite"
@@ -114,7 +114,7 @@ function HeroLoop() {
             style={{ left: node.left, top: node.top, transform: 'translate(-50%, -50%)' }}
           >
             <div
-              className="animate-breathe flex w-[106px] flex-col items-center gap-1 rounded-2xl border border-[var(--line)] bg-[var(--surface)] px-2 py-2.5 text-center shadow-[var(--shadow-card)]"
+              className="animate-breathe flex w-[106px] flex-col items-center gap-1 rounded-xl border border-[var(--line)] bg-[var(--surface)] px-2 py-2.5 text-center shadow-[var(--shadow-card)]"
               style={{ animationDelay: `${index * 1}s` }}
             >
               <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[var(--primary-soft)] text-[var(--primary-strong)]">
@@ -131,82 +131,82 @@ function HeroLoop() {
 }
 
 export function Hero() {
-  const { t } = useLang();
+  const { lang, t } = useLang();
 
   return (
     <section id="top" className="relative overflow-hidden">
       <div className="hero-glow pointer-events-none absolute inset-0" aria-hidden="true" />
       <div className="hero-grid pointer-events-none absolute inset-0" aria-hidden="true" />
-      <div className="container-x relative flex min-h-[calc(100vh-4rem)] max-w-[1180px] flex-col justify-center py-16 md:py-20 lg:min-h-[700px]">
+      <div className="container-x relative flex min-h-[calc(100vh-68px)] flex-col justify-center py-16 md:py-20 lg:min-h-[720px]">
         <div className="grid items-center gap-10 lg:grid-cols-[1.06fr_0.94fr] lg:gap-6">
-          <div className="max-w-[610px]">
-            <div className="mb-5 flex flex-wrap items-center gap-2">
-              <span className="chip chip-primary font-mono">FIELD GUIDE · 2026</span>
+          <div className="max-w-[640px]">
+            <div className="mb-5 flex flex-wrap items-center gap-2.5">
+              <span className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-[var(--primary-strong)]">
+                Field guide · 2026
+              </span>
+              <span className="h-1 w-1 rounded-full bg-[var(--line-strong)]" aria-hidden="true" />
               <span className="chip">{t('14 章 · 可交互', '14 chapters · interactive')}</span>
             </div>
 
             <h1 className="hero-title text-[var(--text)]">
               Agent{' '}
-              <span className="relative inline-block text-[var(--primary-strong)]">
-                Loop
-                <svg
-                  className="absolute -bottom-2 left-0 h-2.5 w-full text-[var(--accent)]"
-                  viewBox="0 0 200 12"
-                  preserveAspectRatio="none"
-                  aria-hidden="true"
-                >
-                  <path d="M2 8C44 2 92 3 198 6" stroke="currentColor" strokeWidth="3" strokeLinecap="round" fill="none" opacity="0.75" />
-                </svg>
-              </span>
+              <span className="text-[var(--primary)]">Loop</span>
               <br />
               {' '}Engineering
             </h1>
 
-            <p className="mt-7 max-w-[540px] text-[1.08rem] font-medium leading-[1.65] text-[var(--text-soft)] md:text-[1.18rem]">
-              {t(
-                '让你的 AI Agent 会干活、会刹车、不烧钱',
-                'Make your AI Agent work, stop, and not burn money',
+            <p className="mt-6 max-w-[580px] text-[1.16rem] font-semibold leading-[1.5] tracking-[-0.015em] text-[var(--text-soft)] md:text-[1.35rem]">
+              {lang === 'zh' ? (
+                <>
+                  让你的 AI Agent
+                  <br className="sm:hidden" />
+                  会干活、会刹车、不烧钱。
+                </>
+              ) : (
+                'Make your AI Agent work, stop, and not burn money.'
               )}
             </p>
 
-            <p className="mt-5 max-w-[560px] border-l-2 border-[var(--accent)] pl-4 text-[0.92rem] leading-[1.85] text-[var(--text-soft)] md:text-[0.98rem]">
+            <p className="mt-4 max-w-[600px] text-[0.94rem] leading-[1.8] text-[var(--muted)] text-pretty md:text-[1rem]">
               {t(
-                '不是写一个 prompt 就叫 Agent——真正的工程，在那个「思考 → 行动 → 观察 → 再来一次」的循环里。',
-                'Writing a prompt does not make an agent. The real engineering lives inside the loop: think → act → observe → go again.',
+                '不是写一个 prompt 就叫 Agent——真正的工程，在那个「思考 → 行动 → 观察 → 再来一次」的循环里。14 章，从世界观到停止条件、上下文、工具、HITL、可观测性与成本，最后落到一份能勾的 Checklist。',
+                'Writing a prompt does not make an agent. The real engineering lives inside the loop: think → act → observe → go again. Fourteen chapters take you from first principles to stopping rules, context, tools, HITL, observability and cost — ending in a checklist you can actually run.',
               )}
             </p>
 
-            <div className="mt-8 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
-              <RippleLink href="#ch13" className="btn btn-accent">
-                <span aria-hidden="true">🚀</span>
-                {t('直接跳到实战 Checklist', 'Jump to the checklist')}
-              </RippleLink>
+            <div className="mt-8 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:items-center">
               <RippleLink href="#ch1" className="btn btn-primary">
-                <span aria-hidden="true">📚</span>
                 {t('从第一章开始', 'Start at chapter 1')}
+                <span aria-hidden="true">→</span>
               </RippleLink>
-              <RippleLink href="#ch14" className="btn btn-ghost">
-                <span aria-hidden="true">🔗</span>
+              <RippleLink href="#ch13" className="btn btn-ghost">
+                {t('直接跳到 Checklist', 'Jump to the checklist')}
+              </RippleLink>
+              <a
+                href="#ch14"
+                className="inline-flex items-center gap-1.5 px-2 py-2 text-[0.82rem] font-semibold text-[var(--muted)] no-underline transition-colors hover:text-[var(--primary-strong)]"
+              >
                 {t('延伸阅读', 'Further reading')}
-              </RippleLink>
+                <span aria-hidden="true">↗</span>
+              </a>
             </div>
 
-            <div className="mt-7 flex flex-wrap items-center gap-x-4 gap-y-2 text-[0.68rem] text-[var(--muted)]">
+            <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 text-[0.7rem] text-[var(--muted)]">
               <span className="flex items-center gap-1.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-[var(--teal)]" />
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--primary)]" />
                 {t('14 章 · 约 45 分钟', '14 chapters · ~45 min')}
               </span>
               <span className="flex items-center gap-1.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--teal)]" />
                 {t('图表 · 代码 · Checklist', 'Diagrams · code · checklist')}
               </span>
               <span className="flex items-center gap-1.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-[var(--primary)]" />
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--lime)]" />
                 {t('中 / EN 双语', 'Bilingual 中 / EN')}
               </span>
             </div>
 
-            <div className="mt-9 inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-[var(--surface)] px-3 py-1 text-[0.6rem] font-medium text-[var(--muted)] opacity-70">
+            <div className="mt-9 inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-[var(--surface)] px-3 py-1 text-[0.62rem] font-medium text-[var(--muted)] opacity-75">
               <span className="h-1 w-1 rounded-full bg-[var(--primary)]" />
               鱼心快跑 · Yuxin Rush
             </div>

@@ -103,7 +103,7 @@ export function CodeBlock({ code, language = 'python', filename, caption }: Code
             </span>
             <span className="code-title">
               {filename || language}
-              <span className="ml-2 rounded border border-[#334155] px-1 py-0.5 text-[0.58rem] uppercase tracking-wider text-[#94a3b8]">
+              <span className="ml-2 rounded border border-[rgba(234,243,238,0.16)] px-1 py-0.5 text-[0.58rem] uppercase tracking-wider text-[#8fa79e]">
                 {language}
               </span>
             </span>

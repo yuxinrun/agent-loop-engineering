@@ -22,11 +22,10 @@ export function Section({ id, num, title, kicker, sources = [], children }: Sect
     >
       <Reveal>
         <div className="mb-7 md:mb-9">
-          <div className="mb-3 flex items-center gap-3">
-            <span className="chip chip-primary font-mono">
-              {t('第', 'CH')} {num}
-            </span>
-            {kicker && <span className="section-kicker">{kicker}</span>}
+          <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-1">
+            <span className="section-kicker">{t(`第 ${num} 章`, `CH ${num}`)}</span>
+            <span className="h-px w-7 bg-[var(--line-strong)]" aria-hidden="true" />
+            {kicker && <span className="section-kicker text-[var(--muted)]">{kicker}</span>}
           </div>
           <h2 className="section-title">{title}</h2>
         </div>

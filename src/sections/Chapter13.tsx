@@ -115,7 +115,7 @@ function Confetti({ burst }: { burst: number }) {
       delay: Math.random() * 0.8,
       duration: 3.4 + Math.random() * 2.2,
       rotate: Math.random() * 720 - 360,
-      color: ['#0ea5e9', '#f97316', '#0d9488', '#fbbf24', '#f87171', '#38bdf8'][i % 6],
+      color: ['#0a958a', '#d94a27', '#2f5fc8', '#7d9a19', '#e2b23c', '#35d8c4'][i % 6],
       width: 5 + Math.random() * 5,
       height: 9 + Math.random() * 8,
     })),

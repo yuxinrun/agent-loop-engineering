@@ -31,13 +31,13 @@ function Site() {
       <Navbar activeId={activeId} />
       <Sidebar activeId={activeId} />
 
-      <div className="pt-16 lg:pl-[260px]">
+      <div className="pt-[68px] lg:pl-[306px]">
         <main>
           <Hero />
           <StatsBand />
 
           <div className="container-x pb-8">
-            <div key={lang} className="lang-fade">
+            <div key={lang} className="lang-fade mx-auto max-w-[980px]">
               <Chapter01 />
               <Chapter02 />
               <Chapter03 />
