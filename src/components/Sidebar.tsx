@@ -1,18 +1,27 @@
 import { useLang } from '../i18n/LangContext';
+import { useTts } from '../lib/TtsContext';
 import { TocNav } from './TocNav';
 
 export function Sidebar({ activeId }: { activeId: string }) {
   const { t } = useLang();
+  const tts = useTts();
 
   return (
     <aside
       className="sidebar-surface fixed bottom-0 left-0 top-[68px] z-30 hidden w-[306px] flex-col border-r border-[var(--line)] lg:flex"
+      style={tts.open ? { paddingBottom: 'calc(var(--player-h, 0px) + 12px)' } : undefined}
       aria-label={t('章节目录', 'Table of contents')}
     >
       <div className="flex items-center justify-between border-b border-[var(--line)] px-4 py-3">
-        <span className="font-mono text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-[var(--muted)]">
+        <a
+          href="#/"
+          className="group flex items-center gap-1.5 font-mono text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-[var(--muted)] no-underline transition-colors hover:text-[var(--primary-strong)]"
+        >
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M13 8H4M7.6 4 3.6 8l4 4" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
           {t('目录', 'Contents')}
-        </span>
+        </a>
         <span className="chip !px-2 !py-0.5 !text-[0.6rem]">{t('14 章', '14 ch')}</span>
       </div>
       <div className="toc-scroll flex-1 overflow-y-auto px-3 py-4">

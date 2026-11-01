@@ -92,7 +92,7 @@ export function CodeBlock({ code, language = 'python', filename, caption }: Code
   };
 
   return (
-    <figure className="my-2 min-w-0">
+    <figure className="my-2 min-w-0" data-no-speak>
       <div className="code-shell min-w-0">
         <div className="code-head">
           <div className="flex min-w-0 items-center gap-2.5">

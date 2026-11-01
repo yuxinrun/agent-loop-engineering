@@ -1,10 +1,10 @@
 # Agent Loop Engineering · 智能体循环工程实战指南
 
-写给有编程基础、但没做过 Agent 的开发者的单页实战指南：14 章讲透 `Context → Action → Verify → Loop`，目标是让你的 Agent **会干活、会刹车、不烧钱、不空转**。
+写给有编程基础、但没做过 Agent 的开发者的实战指南：14 章讲透 `Context → Action → Verify → Loop`，目标是让你的 Agent **会干活、会刹车、不烧钱、不空转**。
 
 线上地址：<https://yuxinrun.github.io/agent-loop-engineering/>
 
-站点为纯静态 SPA，无后端、无外部图片、无图表库依赖；中 / EN 双语、明暗主题、滚动目录、可交互 Checklist 均在浏览器本地完成。
+站点为纯静态 SPA，无后端、无外部图片、无图表库依赖；首页 / 章节两级视图、中 / EN 双语、明暗主题、浏览器本地听书、可交互 Checklist 全部在客户端完成。
 
 ## 技术栈
 
@@ -12,8 +12,9 @@
 - Tailwind CSS 3（`darkMode: 'class'`，颜色通过 CSS 变量驱动）
 - 暖纸色 + 青绿品牌体系，自托管 Manrope Variable / JetBrains Mono Variable（构建时内联）
 - 自绘 SVG / CSS 图表（折线、堆叠面积、瀑布图、环形循环图）
-- IntersectionObserver（滚动入场、目录高亮、数字滚动）
-- localStorage 持久化主题、语言与 Checklist
+- 听书：浏览器 `speechSynthesis`（Web Speech API），零音频文件、零第三方服务
+- IntersectionObserver（滚动入场、数字滚动）
+- localStorage 持久化主题（`ale:theme`）、语言（`ale:lang`）、Checklist（`ale:checklist`）与朗读设置（`ale:tts`）
 
 ## 本地运行
 
@@ -60,20 +61,26 @@ agent-loop-engineering/
 │  └─ favicon.svg             # 项目专属「循环节点」SVG 图标
 ├─ src/
 │  ├─ main.tsx                # React 入口
-│  ├─ App.tsx                 # 页面骨架：Navbar + Sidebar + 14 章 + Footer
-│  ├─ index.css               # 设计系统：品牌变量、字体、卡片、代码块、图表、动效、响应式
+│  ├─ App.tsx                 # 路由分发：首页（Hero + 统计 + 目录卡片）/ 章节页（侧栏 + 单章 + 翻页）
+│  ├─ index.css               # 设计系统：品牌变量、字体、卡片、代码块、图表、播放条、动效、响应式
 │  ├─ assets/fonts/           # Manrope / JetBrains Mono Variable（构建时内联）
 │  ├─ i18n/
 │  │  └─ LangContext.tsx      # 中 / EN 上下文，默认中文，localStorage 记忆
 │  ├─ lib/
-│  │  └─ hooks.ts             # useTheme / useLocalStorage / useActiveSection / useCountUp
+│  │  ├─ hooks.ts             # useTheme / useLocalStorage / useCountUp
+│  │  ├─ router.ts            # hash 路由：#chN 进章节，#/ 或空回首页
+│  │  ├─ tts.ts               # 朗读文本抽取 + 语音匹配（Web Speech API）
+│  │  └─ TtsContext.tsx       # 听书状态机：播放/暂停/逐段/自动联播/设置持久化
 │  ├─ content/
-│  │  ├─ chapters.ts          # 14 章元数据与四个篇章分组
-│  │  └─ sources.ts           # 22 个已核验的一手 / 官方来源
+│  │  ├─ chapters.ts          # 14 章元数据、一句话导览与四个篇章分组
+│  │  └─ sources.ts           # 23 个已核验的一手 / 官方来源
 │  ├─ components/
 │  │  ├─ Navbar.tsx           # 固定顶栏、语言 / 主题切换、移动端汉堡菜单
-│  │  ├─ Sidebar.tsx          # 桌面端固定左侧目录
-│  │  ├─ TocNav.tsx           # 目录分组与滚动高亮
+│  │  ├─ Sidebar.tsx          # 章节页左侧目录（首页不渲染）
+│  │  ├─ TocNav.tsx           # 目录分组与当前章节高亮
+│  │  ├─ ChapterGrid.tsx      # 首页 14 章卡片，含「听」按钮
+│  │  ├─ ChapterChrome.tsx    # 章节顶栏（返回 / 听本章）与底部上一章 / 下一章
+│  │  ├─ AudioPlayer.tsx      # 底部常驻播放条与不支持时的友好提示
 │  │  ├─ Hero.tsx             # 首屏文案 + 四节点循环动画
 │  │  ├─ StatsBand.tsx        # 128K / 50–100 / 177 / 3× 数字滚动
 │  │  ├─ Section.tsx          # 章节外壳、标题、来源 chips
@@ -82,7 +89,7 @@ agent-loop-engineering/
 │  │  ├─ SourceChip.tsx       # 「📖 来源」外链
 │  │  ├─ Reveal.tsx           # 滚动入场
 │  │  ├─ RippleButton.tsx     # 按钮弹簧缩放与涟漪
-│  │  ├─ BackToTop.tsx        # 回到顶部
+│  │  ├─ BackToTop.tsx        # 回到顶部（自动避开播放条）
 │  │  ├─ Logo.tsx             # 项目专属循环 Logo
 │  │  └─ Footer.tsx           # 页脚与署名
 │  └─ sections/
@@ -136,7 +143,13 @@ agent-loop-engineering/
 ## 交互与验收点
 
 - 暖纸色 + 青绿品牌体系，深色为深绿底；1180 版心、306 侧栏、68 导航、780 正文。
-- 桌面端固定左侧目录，滚动高亮当前章节；移动端汉堡菜单抽屉。
+- 首页只有 Hero、数据条与 14 章卡片，**不显示左侧目录**；点卡片（或顶栏 Checklist / 汉堡菜单）进入章节后才出现侧栏目录，并高亮当前章节。
+- 路由为 hash：`#chN` 打开对应章节、`#/` 回首页，可分享、可前进后退、直达链接自动滚到顶部并更新文档标题。
+- 章节底部有上一章 / 下一章卡片，顶栏有「全部章节」返回入口。
+- 听书：章节顶栏「听本章」或首页卡片的「听」按钮，用浏览器 `speechSynthesis` 朗读当前语言正文；代码块、表格、翻转卡与来源链接自动跳过。
+- 底部常驻播放条：逐段进度、播放 / 暂停、上下一段、上下章、语速 0.75–1.75×、音色选择、「自动联播下一章」开关，Esc 关闭；设置存 `ale:tts`。
+- 朗读时当前段落高亮并自动滚入视野；切换语言会停止旧脚本并按新语言重新抽取。
+- 浏览器或系统不支持语音时给出分平台指引（Windows / macOS / iOS / Android），并提供「用现有音色继续」「改用英文 / 中文朗读」两个出口，不留死按钮。
 - 右上角明暗主题 / 中英切换，无刷新、淡入淡出、`localStorage` 记忆。
 - 第 2 章环形图节点可点击，也可自动轮播。
 - 第 8 章七张失败模式卡支持点击、键盘与悬停 3D 翻转。
